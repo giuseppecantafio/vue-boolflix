@@ -1,0 +1,11 @@
+/* importo bootstrap da node-modules */
+@import "~bootstrap/scss/bootstrap.scss";
+
+/* importo i font necessari, precedentemente installati */
+
+/* importo le variabili globali */
+@import "./vars.scss";
+
+.debug {
+    border: 1px solid black;
+}
