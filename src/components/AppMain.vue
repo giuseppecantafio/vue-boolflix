@@ -10,34 +10,36 @@
             aria-label="Inserire il titolo da ricercare"
             aria-describedby="basic-addon2"
             v-model="inputText"
-            @keyup.enter="research"
+            @keyup.enter="myQuery"
           />
           <div class="input-group-append">
             <button
               class="btn btn-outline-secondary"
               type="button"
-              @click="research"
+              @click="myQuery"
             >
               Ricerca
             </button>
           </div>
         </div>
       </div>
-      <app-cards :film="movies"/>
+      <app-cards :items="movies" title="Film" />
+      <app-cards :items="series" title="Serie" />
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import AppCards from '../components/AppCards.vue';
+import AppCards from "../components/AppCards.vue";
 
 export default {
   components: { AppCards },
   name: "AppMain",
   data() {
     return {
-      forExampleOnly: "https://api.themoviedb.org/3/search/movie/?api_key=1e8e3f34ceeb3f42ea36036bcfd6d28f&query=ciao&language=it-IT",
+      forExampleOnly:
+        "https://api.themoviedb.org/3/search/movie/?api_key=1e8e3f34ceeb3f42ea36036bcfd6d28f&query=ciao&language=it-IT",
       apiURL: "https://api.themoviedb.org/3/search",
       typeMovie: "/movie/",
       typeSeries: "/tv/",
@@ -48,13 +50,17 @@ export default {
     };
   },
   methods: {
-    research() {
+    myQuery() {
       const queryParams = {
         params: {
           api_key: this.apiPASS,
-          query: this.inputText
-        }
-      }
+          query: this.inputText,
+        },
+      };
+      this.researchMovies(queryParams);
+      this.researchSeries(queryParams);
+    },
+    researchMovies(queryParams) {
       axios
         .get(this.apiURL + this.typeMovie, queryParams)
         .then((res) => {
@@ -62,8 +68,22 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        }).finally(()=>{
-          this.inputText = '';
+        })
+        .finally(() => {
+          this.inputText = "";
+        });
+    },
+    researchSeries(queryParams) {
+      axios
+        .get(this.apiURL + this.typeSeries, queryParams)
+        .then((res) => {
+          this.series = res.data.results;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.inputText = "";
         });
     },
   },
