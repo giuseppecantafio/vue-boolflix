@@ -10,6 +10,7 @@
             aria-label="Inserire il titolo da ricercare"
             aria-describedby="basic-addon2"
             v-model="inputText"
+            @keyup.enter="research"
           />
           <div class="input-group-append">
             <button
@@ -22,58 +23,47 @@
           </div>
         </div>
       </div>
-      <div class="col-12" v-if="result.length != 0">
-        <h1>Risultato della ricerca:</h1>
-        <ul v-for="(item, index) in result" :key="index">
-          <li>
-            <p>Titolo: <em>{{ item.title }}</em></p>
-            <p>Titolo originale: {{ item.original_title }}</p>
-            <p>Lingua originale: {{ item.original_language }}</p>
-            <p>Voto medio: {{ item.vote_average }}</p>
-            <br />
-          </li>
-        </ul>
-      </div>
+      <app-cards :film="movies"/>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import AppCards from './AppCards.vue';
+
 export default {
+  components: { AppCards },
   name: "AppMain",
   data() {
     return {
-      forExampleOnly:
-        "https://api.themoviedb.org/3/search/movie/?api_key=1e8e3f34ceeb3f42ea36036bcfd6d28f&query=ciao&language=it-IT",
+      forExampleOnly: "https://api.themoviedb.org/3/search/movie/?api_key=1e8e3f34ceeb3f42ea36036bcfd6d28f&query=ciao&language=it-IT",
       apiURL: "https://api.themoviedb.org/3/search",
-      type: "movie",
-      apiPASS: "?api_key=1e8e3f34ceeb3f42ea36036bcfd6d28f",
+      typeMovie: "/movie/",
+      typeSeries: "/tv/",
+      apiPASS: "1e8e3f34ceeb3f42ea36036bcfd6d28f",
       inputText: "",
-      languageIT: "language=it-IT",
-      result: [],
+      movies: [],
     };
   },
   methods: {
     research() {
+      const queryParams = {
+        params: {
+          api_key: this.apiPASS,
+          query: this.inputText
+        }
+      }
       axios
-        .get(
-          this.apiURL +
-            "/" +
-            this.type +
-            "/" +
-            this.apiPASS +
-            "&query=" +
-            this.inputText +
-            "&" +
-            this.languageIT
-        )
+        .get(this.apiURL + this.typeMovie, queryParams)
         .then((res) => {
-          this.result = res.data.results;
+          this.movies = res.data.results;
           console.log(this.result);
         })
         .catch((error) => {
           console.log(error);
+        }).finally(()=>{
+          this.inputText = '';
         });
     },
   },
