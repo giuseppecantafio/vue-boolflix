@@ -8,7 +8,7 @@
             Titolo: <em>{{ item.title }}</em>
           </p>
           <p>Titolo originale: {{ item.original_title }}</p>
-          <p>Lingua originale: {{ item.original_language }}</p>
+          <p>Lingua originale: <country-flag :country='item.original_language' size='small'/> {{item.original_language}}</p>
           <p>Voto medio: {{ item.vote_average }}</p>
           <br />
         </li>

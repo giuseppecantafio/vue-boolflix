@@ -44,6 +44,7 @@ export default {
       apiPASS: "1e8e3f34ceeb3f42ea36036bcfd6d28f",
       inputText: "",
       movies: [],
+      series: [],
     };
   },
   methods: {
