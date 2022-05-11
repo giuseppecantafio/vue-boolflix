@@ -30,7 +30,7 @@
 
 <script>
 import axios from "axios";
-import AppCards from './AppCards.vue';
+import AppCards from '../components/AppCards.vue';
 
 export default {
   components: { AppCards },
@@ -59,7 +59,6 @@ export default {
         .get(this.apiURL + this.typeMovie, queryParams)
         .then((res) => {
           this.movies = res.data.results;
-          console.log(this.result);
         })
         .catch((error) => {
           console.log(error);

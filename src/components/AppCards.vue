@@ -8,7 +8,10 @@
             Titolo: <em>{{ item.title }}</em>
           </p>
           <p>Titolo originale: {{ item.original_title }}</p>
-          <p>Lingua originale: <country-flag :country='item.original_language' size='small'/> {{item.original_language}}</p>
+          <p>Lingua originale: 
+              <img class="little-flag" v-if="item.original_language === 'it' || item.original_language === 'en'" :src="require('../assets/img/' + `${item.original_language}` + '-flag.png')" :alt="item.original_language">
+              <span v-if="item.original_language !== 'it' && item.original_language !== 'en'">{{item.original_language}}</span>
+          </p>
           <p>Voto medio: {{ item.vote_average }}</p>
           <br />
         </li>
@@ -20,10 +23,14 @@
 <script>
 export default {
   name: "AppCards",
-  props: ['film']
-};
+  props: ["film"]
+}
 </script>
 
 <style lang="scss">
 @import "../style/general.scss";
+.little-flag{
+  width: 20px;
+  height: 20px;
+}
 </style>
