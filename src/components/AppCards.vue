@@ -47,7 +47,11 @@
           </p>
           <p>
             Locandina:
-            <img :src="image_path + item.poster_path" alt="Locandina" />
+            <img
+              :src="image_path + item.poster_path"
+              onerror="this.src='https://placebear.com/200/300'"
+              alt="Locandina"
+            />
           </p>
           <br />
         </li>
