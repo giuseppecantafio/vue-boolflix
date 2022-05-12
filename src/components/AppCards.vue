@@ -33,11 +33,21 @@
               >{{ item.original_language }}</span
             >
           </p>
-          <p>Voto medio: {{ item.vote_average }}</p>
+          <p>
+            Rating:
+            <i
+              v-for="(num, index) in n"
+              :key="index"
+              :class="
+                num <= item.vote_average / 2
+                  ? 'fa-solid fa-star'
+                  : 'fa-regular fa-star'
+              "
+            ></i>
+          </p>
           <p>
             Locandina:
             <img :src="image_path + item.poster_path" alt="Locandina" />
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </p>
           <br />
         </li>
@@ -53,6 +63,7 @@ export default {
   data() {
     return {
       image_path: "https://image.tmdb.org/t/p/w92/",
+      n: 5,
     };
   },
 };
