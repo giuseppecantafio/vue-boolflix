@@ -34,6 +34,11 @@
             >
           </p>
           <p>Voto medio: {{ item.vote_average }}</p>
+          <p>
+            Locandina:
+            <img :src="image_path + item.poster_path" alt="Locandina" />
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </p>
           <br />
         </li>
       </ul>
@@ -45,6 +50,11 @@
 export default {
   name: "AppCards",
   props: ["items", "series", "title"],
+  data() {
+    return {
+      image_path: "https://image.tmdb.org/t/p/w92/",
+    };
+  },
 };
 </script>
 

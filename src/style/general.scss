@@ -3,6 +3,14 @@
 
 /* importo i font necessari, precedentemente installati */
 
+/* Devo mettere anche questo per sovrascrivere nel caso in cui lo trovasse, la cartella contenente i webfonts */
+$fa-font-path: "./webfonts";
+
+/*importo fontawesome */
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+
 /* importo le variabili globali */
 @import "./vars.scss";
 
