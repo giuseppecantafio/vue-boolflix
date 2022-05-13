@@ -1,31 +1,24 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Inserire il titolo da ricercare"
-            aria-label="Inserire il titolo da ricercare"
-            aria-describedby="basic-addon2"
-            v-model="inputText"
-            @keyup.enter="myQuery"
-          />
-          <div class="input-group-append">
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              @click="myQuery"
-            >
-              Ricerca
-            </button>
+  <div>
+    <header>
+      <div class="container-fluid">
+        <nav class="row">
+          <div class="col-6 d-flex justify-content-start align-items-center">
+            <h1>Boolflix!</h1>
           </div>
-        </div>
+          <div class="col-6 d-flex justify-content-center align-items-center">
+            <input
+              type="text"
+              placeholder="Cerca"
+              v-model="inputText"
+              @keyup.enter="myQuery"
+            />
+          </div>
+        </nav>
       </div>
-      <app-cards :items="movies" title="Film" />
-      <app-cards :items="series" title="Serie" />
-    </div>
+    </header>
+          <app-cards :items="movies" title="Film" />
+          <app-cards :items="series" title="Serie" />
   </div>
 </template>
 
@@ -92,4 +85,15 @@ export default {
 
 <style lang="scss">
 @import "../style/general.scss";
+
+nav {
+  background-color: $header-bg;
+  height: 60px;
+  h1 {
+    color: $logo-cl;
+  }
+  input {
+    padding-right: 10px;
+  }
+}
 </style>
